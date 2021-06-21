@@ -25,10 +25,6 @@ class IListOf2<T> {
   int get hashCode => hashObj2(first, last);
 }
 
-/// Dedicated Indexation Zip
-// TODO required non-function type alias since dart 2.13
-// typedef IndexedZip<T> = Zip<int, T>;
-
 /// Resulting composition of multiple sources like indexes or other Iterables.
 /// Adapted from Tuple package
 class ITuple2<T1, T2> {
