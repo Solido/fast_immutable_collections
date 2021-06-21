@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 
+import '../../fast_immutable_collections.dart';
 import "../base/hash.dart";
 
 /// An *immutable* list of only 2 items.
@@ -30,7 +31,7 @@ class IListOf2<T> {
 
 /// Resulting composition of multiple sources like indexes or other Iterables.
 /// Adapted from Tuple package
-class Tuple2<T1, T2> {
+class ITuple2<T1, T2> {
   /// Returns the first item of the tuple
   final T1 first;
 
@@ -38,35 +39,31 @@ class Tuple2<T1, T2> {
   final T2 second;
 
   /// Creates a new tuple value with the specified items.
-  const Tuple2(this.first, this.second);
+  const ITuple2(this.first, this.second);
 
-  /// Create a new tuple value with the specified list [items].
-  factory Tuple2.fromList(List items) {
-    if (items.length != 2) {
-      throw ArgumentError('items must have length 2');
-    }
+  /// Create a new tuple value with the specified Iterable [items].
+  factory ITuple2.fromList(Iterable items) {
+    if (items.length != 2) throw ArgumentError('items must have length 2');
 
-    return Tuple2<T1, T2>(items[0] as T1, items[1] as T2);
+    return ITuple2<T1, T2>(items.elementAt(0) as T1, items.elementAt(1) as T2);
   }
 
   /// Returns a tuple with the first item set to the specified value.
-  Tuple2<T1, T2> withItem1(T1 v) => Tuple2<T1, T2>(v, second);
+  ITuple2<T1, T2> withItem1(T1 v) => ITuple2<T1, T2>(v, second);
 
   /// Returns a tuple with the second item set to the specified value.
-  Tuple2<T1, T2> withItem2(T2 v) => Tuple2<T1, T2>(first, v);
+  ITuple2<T1, T2> withItem2(T2 v) => ITuple2<T1, T2>(first, v);
 
-  /// Creates a [List] containing the items of this [Tuple2].
-  ///
-  /// The elements are in item order. The list is variable-length
-  /// if [growable] is true.
-  List toList({bool growable = false}) => List.from([first, second], growable: growable);
+  /// Creates a [IList] containing the items of this [ITuple2].
+  /// The elements are in item order.
+  IList toList({bool growable = false}) => [first, second].lock;
 
   @override
   String toString() => '($first, $second)';
 
   @override
   bool operator ==(Object other) =>
-      other is Tuple2 && other.first == first && other.second == second;
+      other is ITuple2 && other.first == first && other.second == second;
 
   @override
   int get hashCode => hash2(first.hashCode, second.hashCode);

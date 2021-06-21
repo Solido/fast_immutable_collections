@@ -1587,19 +1587,19 @@ abstract class IList<T> // ignore: must_be_immutable
       IList._unsafeFromList(toList()..shuffle(random), config: config);
 
   /// Aggregate each element with corresponding index
-  Iterable<Tuple2<int, T>> zipWithIndex() =>
-      List.generate(length, (index) => Tuple2(index, _l[index])).toIList(config);
+  Iterable<ITuple2<int, T>> zipWithIndex() =>
+      List.generate(length, (index) => ITuple2(index, _l[index])).toIList(config);
 
   /// Aggregate two sources trimming by the shortest source
-  Iterable<Tuple2<T, T>> zip(Iterable<T> otherIterable) {
+  Iterable<ITuple2<T, T>> zip(Iterable<T> otherIterable) {
     final other = otherIterable.toList();
     final minLength = min(length, other.length);
-    return List.generate(minLength, (index) => Tuple2(_l[index], other[index])).toIList(config);
+    return List.generate(minLength, (index) => ITuple2(_l[index], other[index])).toIList(config);
   }
 
   /// Aggregate two sources based on the longest source.
-  /// Missing elements can be completed by passing a [currentFill] method or will be at null by default
-  Iterable<Tuple2<T?, U?>> zipAll<U>(
+  /// Missing elements can be filled using [currentFill] or [otherFill] or will be null by default
+  Iterable<ITuple2<T?, U?>> zipAll<U>(
     Iterable<U> otherIterable, {
     T Function(int index)? currentFill,
     U Function(int index)? otherFill,
@@ -1616,7 +1616,7 @@ abstract class IList<T> // ignore: must_be_immutable
 
     return List.generate(
         maxLength,
-        (index) => Tuple2<T?, U?>(
+        (index) => ITuple2<T?, U?>(
               getOrFill(current, index, currentFill) as T?,
               getOrFill(other, index, otherFill) as U?,
             )).toIList(config);

@@ -1630,7 +1630,7 @@ void main() {
     final ilist1 = ['red', 'green', 'blue', 'alpha'].lock;
     final indexZipped = ilist1.zipWithIndex();
     expect(indexZipped,
-        IList([Tuple2(0, 'red'), Tuple2(1, 'green'), Tuple2(2, 'blue'), Tuple2(3, 'alpha')]));
+        IList([ITuple2(0, 'red'), ITuple2(1, 'green'), ITuple2(2, 'blue'), ITuple2(3, 'alpha')]));
   });
 
   test("Zip with another source of same or different length ignoring the longer Iterable", () {
@@ -1638,32 +1638,32 @@ void main() {
     final countries = ['France', 'Germany', 'Brazil', 'Japan'].lock;
     final capitals = ['Paris', 'Berlin', 'Brasilia', 'Tokyo'].lock;
 
-    final Iterable<Tuple2> zipped = countries.zip(capitals);
+    final Iterable<ITuple2> zipped = countries.zip(capitals);
     expect(
         zipped,
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
-          Tuple2('Brazil', 'Brasilia'),
-          Tuple2('Japan', 'Tokyo')
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
+          ITuple2('Brazil', 'Brasilia'),
+          ITuple2('Japan', 'Tokyo')
         ]));
 
     // Ignore Brazil Japan
-    final Iterable<Tuple2> subIn = countries.take(2).toIList().zip(capitals);
+    final Iterable<ITuple2> subIn = countries.take(2).toIList().zip(capitals);
     expect(
         subIn,
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
         ]));
 
     // Ignore Brazil Japan
-    final Iterable<Tuple2> subOut = countries.zip(capitals.take(2));
+    final Iterable<ITuple2> subOut = countries.zip(capitals.take(2));
     expect(
         subOut,
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
         ]));
   });
 
@@ -1675,19 +1675,19 @@ void main() {
     expect(
         countries.zipAll(capitals),
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
-          Tuple2('Brazil', 'Brasilia'),
-          Tuple2('Japan', 'Tokyo')
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
+          ITuple2('Brazil', 'Brasilia'),
+          ITuple2('Japan', 'Tokyo')
         ]));
 
     expect(
         countries.zipAll(capitals.take(2)),
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
-          Tuple2('Brazil', null),
-          Tuple2('Japan', null)
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
+          ITuple2('Brazil', null),
+          ITuple2('Japan', null)
         ]));
 
     expect(
@@ -1696,10 +1696,10 @@ void main() {
               currentFill: (idx) => 'Country $idx',
             ),
         IList([
-          Tuple2('France', 'Paris'),
-          Tuple2('Germany', 'Berlin'),
-          Tuple2('Country 2', 'Brasilia'),
-          Tuple2('Country 3', 'Tokyo')
+          ITuple2('France', 'Paris'),
+          ITuple2('Germany', 'Berlin'),
+          ITuple2('Country 2', 'Brasilia'),
+          ITuple2('Country 3', 'Tokyo')
         ]));
 
     expect(
@@ -1708,10 +1708,10 @@ void main() {
           otherFill: (idx) => (idx + 1) * 100,
         ),
         IList([
-          Tuple2('France', 100),
-          Tuple2('Germany', 200),
-          Tuple2('Brazil', 300),
-          Tuple2('Japan', 400)
+          ITuple2('France', 100),
+          ITuple2('Germany', 200),
+          ITuple2('Brazil', 300),
+          ITuple2('Japan', 400)
         ]));
   });
 
