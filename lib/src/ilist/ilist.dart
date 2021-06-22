@@ -856,6 +856,9 @@ abstract class IList<T> // ignore: must_be_immutable
   /// Returns the first element of this Iterable
   T head() => _l.first;
 
+  /// Returns elements of this Iterable
+  Iterable<T> init() => _l.take(_l.length - 1);
+
   /// Converts each element to a [String] and concatenates the strings with the [separator]
   /// in-between each concatenation.
   @override

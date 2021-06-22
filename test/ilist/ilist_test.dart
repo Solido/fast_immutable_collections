@@ -1630,6 +1630,7 @@ void main() {
 
     expect(ilist.head(), "a");
     expect(ilist.tail(), ["b", "c", "d", "e", "f"].lock);
+    expect(ilist.init(), ["a", "b", "c", "d", "e"].lock);
   });
 
   //////////////////////////////////////////////////////////////////////////////
